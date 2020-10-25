@@ -234,7 +234,7 @@ class App extends React.Component {
       }
     }
 
-    
+    let recommend_header = "Recommended Courses (" + this.state.recommendedCourses.length + ")";
     
     return (
       <>
@@ -262,7 +262,7 @@ class App extends React.Component {
               <CourseArea data={completed} completeMode="true" recommendCourse={(course, value) => this.recommendCourse(course, value)}/>
             </div>
           </Tab>
-          <Tab eventKey="recommended" title="Recommended Courses" style={{paddingTop: '5vh'}}>
+          <Tab eventKey="recommended" title={recommend_header} style={{paddingTop: '5vh'}}>
             <div style={{marginLeft: '20vw'}}>
               <CourseArea data={this.state.recommendedCourses} addCartCourse={(data) => this.addCartCourse(data)} removeCartCourse={(data) => this.removeCartCourse(data)} cartCourses={this.state.cartCourses} completed={this.state.completedCourses}/>
             </div>

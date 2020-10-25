@@ -40,6 +40,7 @@ class Sidebar extends React.Component {
 
   getSubjectOptions() {
     let subjectOptions = [];
+    this.props.subjects.sort();
 
     for(const subject of this.props.subjects) {
       subjectOptions.push(<option key={subject}>{subject}</option>);
@@ -50,6 +51,7 @@ class Sidebar extends React.Component {
 
   getInterestAreaOptions() {
     let interestAreaOptions = [];
+    this.props.interestAreas.sort();
 
     for (const interestArea of this.props.interestAreas) {
       interestAreaOptions.push(<option key={interestArea}>{interestArea}</option>);

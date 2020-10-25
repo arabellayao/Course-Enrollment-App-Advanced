@@ -27,6 +27,8 @@ class Course extends React.Component {
             {this.getExpansionButton()}
           </Card.Title>
           <Card.Subtitle className="mb-2 text-muted">{this.props.data.number} - {this.getCredits()}</Card.Subtitle>
+          Subject: {this.props.data.subject}
+          <br></br>
           {this.getDescription()}
           {this.meetRequisites()}
           <Button variant='dark' onClick={() => this.openModal()}>View sections</Button>
@@ -96,12 +98,15 @@ class Course extends React.Component {
       sections.push (
           <Card key={i}>
             <Accordion.Toggle as={Card.Header} variant="link" eventKey={i} style={{height: 63, display: 'flex', alignItems: 'center'}}>
-              {"Section " + i}
+              {this.props.data.sections[i].number}
               {this.getSectionButton(i)}
             </Accordion.Toggle>
             <Accordion.Collapse eventKey={i}>
               <Card.Body>
-                {JSON.stringify(this.props.data.sections[i].time)}
+                Time: {this.getTime(this.props.data.sections[i].time)}
+                Instructor: {this.props.data.sections[i].instructor}
+                <br></br>
+                Location: {this.props.data.sections[i].location}
                 {this.getSubsections(i, this.props.data.sections[i])}
               </Card.Body>
             </Accordion.Collapse>
@@ -114,6 +119,34 @@ class Course extends React.Component {
         {sections}
       </Accordion>
     )
+  }
+
+  getTime(times) {
+    let result = [];
+
+    if (times.monday) {
+      result.push(<li key="monday">Monday : {times.monday}</li>);
+    }
+    if (times.tuesday) {
+      result.push(<li key="tuesday">Tuesday : {times.tuesday}</li>);
+    }
+    if (times.wednesday) {
+      result.push(<li key="wednesday">Wednesday : {times.wednesday}</li>);
+    }
+    if (times.thursday) {
+      result.push(<li key="thursday">Thursday : {times.thursday}</li>);
+    }
+    if (times.friday) {
+      result.push(<li key="friday">Friday : {times.friday}</li>);
+    }
+    if (times.saturday) {
+      result.push(<li key="saturday">Saturday : {times.saturday}</li>);
+    }
+    if (times.sunday) {
+      result.push(<li key="sunday">Sunday : {times.sunday}</li>);
+    }
+    
+    return (<ul>{result}</ul>);
   }
 
   getSectionButton(section) {
@@ -198,12 +231,13 @@ class Course extends React.Component {
     subsections.push (
         <Card key={i}>
           <Accordion.Toggle as={Card.Header} variant="link" eventKey={i} style={{height: 63, display: 'flex', alignItems: 'center'}}>
-            {i}
+            {sectionValue.subsections[i].number}
             {this.getSubsectionButton(sectionKey, i)}
           </Accordion.Toggle>
           <Accordion.Collapse eventKey={i}>
             <Card.Body>
-              {JSON.stringify(sectionValue.subsections[i].time)}
+              Time: {this.getTime(sectionValue.subsections[i].time)}
+              Location: {sectionValue.subsections[i].location}
             </Card.Body>
           </Accordion.Collapse>
         </Card>
